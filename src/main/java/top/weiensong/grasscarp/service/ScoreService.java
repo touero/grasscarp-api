@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 import top.weiensong.grasscarp.mapper.ScoreMapper;
 import top.weiensong.grasscarp.model.Score;
+import top.weiensong.grasscarp.utils.ProvinceMapper;
 
 import java.util.List;
 
@@ -20,6 +21,14 @@ public class ScoreService {
         QueryWrapper<Score> wrapper = new QueryWrapper<>();
         wrapper.eq("school_id", schoolId);
 
-        return scoreMapper.selectList(wrapper);
+        List<Score> scores = scoreMapper.selectList(wrapper);
+
+        for (Score score : scores) {
+            score.setProvinceName(
+                    ProvinceMapper.getName(score.getProvinceId())
+            );
+        }
+
+        return scores;
     }
 }

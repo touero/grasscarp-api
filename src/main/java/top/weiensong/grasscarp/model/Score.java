@@ -11,16 +11,15 @@ public class Score {
     @TableField("school_id")
     private String schoolId;
 
+    @JsonIgnore
     @TableField("province_id")
     private String provinceId;
 
-    @TableField("type")
+    @TableField(exist = false)
+    private String provinceName;
+
     private String type;
-
-    @TableField("min")
     private String min;
-
-    @TableField("year")
     private String year;
 
     public Score() {
@@ -40,6 +39,14 @@ public class Score {
 
     public void setProvinceId(String provinceId) {
         this.provinceId = provinceId;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 
     public String getType() {
